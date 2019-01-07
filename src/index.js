@@ -386,28 +386,57 @@
 
 
 // 工厂模式
-class Product {
-    constructor(name){
-        this.name = name;
-    }
-    init() {
-        alert('init');
-        console.log(this.name);
-    }
-    fun1() {
-        alert('fun1');
-    }
-    fun2() {
-        alert('fun2');
+// class Product {
+//     constructor(name){
+//         this.name = name;
+//     }
+//     init() {
+//         alert('init');
+//         console.log(this.name);
+//     }
+//     fun1() {
+//         alert('fun1');
+//     }
+//     fun2() {
+//         alert('fun2');
+//     }
+// }
+// class Creator { // 工厂
+//     create(name) {
+//         return new Product(name);
+//     }
+// }
+// //测试
+// let creator = new Creator();
+// let p = creator.create('p1');
+// p.init();
+// p.fun1();
+
+
+
+// 单例模式
+// 测试：注意这里只能使用静态函数 getInstance，不能new SingleObject()！！！
+class SingleObject {
+    login(){
+        console.log('login...') 
     }
 }
-class Creator { // 工厂
-    create(name) {
-        return new Product(name);
+SingleObject.getInstance = (function(){
+    let instance;
+    return function(){
+        if(!instance){
+            instance = new SingleObject();
+        }
+        return instance;
     }
-}
-//测试
-let creator = new Creator();
-let p = creator.create('p1');
-p.init();
-p.fun1();
+})();
+let obj1 = SingleObject.getInstance();
+obj1.login();
+let obj2 = SingleObject.getInstance();
+obj2.login();
+console.log('obj1 === obj2',obj1 === obj2);// 两者必须完全相等
+
+console.log('------------');
+let obj3 = new SingleObject(); // 无法完全控制使用者去使用
+obj3.login();
+console.log('obj1 === obj3',obj1 === obj3);
