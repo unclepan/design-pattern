@@ -11,6 +11,9 @@
 // alert(p.getName());
 
 
+
+
+
 // 继承
 // class People {
 //     constructor(name, age) {
@@ -34,6 +37,12 @@
 //     }
 // }
 // let xiaoming = new Student('xiaoming', 10, 'A1');
+
+
+
+
+
+
 
 // 封装
 // class People {
@@ -72,6 +81,11 @@
 // alert(xiaoming.girlfriend);
 // alert(xiaoming.weight);
 
+
+
+
+
+
 // 多态
 // class People {
 //     constructor(name){
@@ -101,6 +115,10 @@
 // let b = new B('b');
 // b.saySomething();
 
+
+
+
+
 // 应用举例
 // class jQuery {
 //     constructor(seletor) {
@@ -128,6 +146,7 @@
 // }
 // var $p = $('p');
 // console.log($p);
+
 
 
 // UML类图关系
@@ -170,6 +189,12 @@
 // let b = new B('b');
 // b.saySomething();
 
+
+
+
+
+
+
 //用promise演示设计原则 SO
 // function loadImg(src){
 //     let promise = new Promise(function(resolve,reject){
@@ -196,6 +221,14 @@
 // }).catch(function(ex){
 //     alert(ex);
 // });
+
+
+
+
+
+
+
+
 
 // 面试题1
 // 打车时，可以打快车或者专车。任何车都有车牌号和名称
@@ -239,6 +272,7 @@
 // let trip = new Trip(car);
 // trip.start();
 // trip.end();
+
 
 
 
@@ -384,7 +418,6 @@
 
 
 
-
 // 工厂模式
 // class Product {
 //     constructor(name){
@@ -416,27 +449,318 @@
 
 // 单例模式
 // 测试：注意这里只能使用静态函数 getInstance，不能new SingleObject()！！！
-class SingleObject {
-    login(){
-        console.log('login...') 
-    }
-}
-SingleObject.getInstance = (function(){
-    let instance;
-    return function(){
-        if(!instance){
-            instance = new SingleObject();
-        }
-        return instance;
-    }
-})();
-let obj1 = SingleObject.getInstance();
-obj1.login();
-let obj2 = SingleObject.getInstance();
-obj2.login();
-console.log('obj1 === obj2',obj1 === obj2);// 两者必须完全相等
+// class SingleObject {
+//     login(){
+//         console.log('login...') 
+//     }
+// }
+// SingleObject.getInstance = (function(){
+//     let instance;
+//     return function(){
+//         if(!instance){
+//             instance = new SingleObject();
+//         }
+//         return instance;
+//     }
+// })();
+// let obj1 = SingleObject.getInstance();
+// obj1.login();
+// let obj2 = SingleObject.getInstance();
+// obj2.login();
+// console.log('obj1 === obj2',obj1 === obj2);// 两者必须完全相等
 
-console.log('------------');
-let obj3 = new SingleObject(); // 无法完全控制使用者去使用
-obj3.login();
-console.log('obj1 === obj3',obj1 === obj3);
+// console.log('------------');
+// let obj3 = new SingleObject(); // 无法完全控制使用者去使用
+// obj3.login();
+// console.log('obj1 === obj3',obj1 === obj3);
+
+
+
+
+
+// 单例模式登录框逻辑
+// class LoginForm {
+//     constructor(){
+//         this.state = 'hide';
+//     }
+//     show(){
+//         if(this.state === 'show') {
+//             alert('已经显示');
+//             return
+//         }
+//         this.state = 'show';
+//         console.log('登陆框显示成功');
+//     }
+//     hide() {
+//         if(this.state === 'hide') {
+//             alert('已经隐藏');
+//             return;
+//         }
+//         this.state = 'hide';
+//         console.log('登陆框隐藏成功');
+//     }
+// }
+// LoginForm.getInstance = (function(){
+//     let instance;
+//     return function(){
+//         if(!instance) {
+//             instance = new LoginForm();
+//         }
+//         return instance;
+//     }
+// })();
+// //测试
+// let login1 = LoginForm.getInstance();
+// login1.show();
+
+// let login2 = LoginForm.getInstance();
+// login2.hide();
+// console.log('login1===login2', login1===login2);
+
+
+
+
+
+
+//适配器模式
+// class Adaptee {
+//     specificRequest() {
+//         return '德国标准插头';
+//     }
+// }
+// class Target {
+//     constructor() {
+//         this.adaptee = new Adaptee();
+//     }
+//     request() {
+//         let info = this.adaptee.specificRequest();
+//         return `${info} - 转换器 - 中国标准插头 `
+//     }
+// }
+// // 测试
+// let target = new Target();
+// let res = target.request();
+// console.log(res);
+
+
+
+
+
+// 装饰器模式
+// class Circle {
+//     draw() {
+//         console.log('画一个圆形');
+//     }
+// }
+// class Decorator {
+//     constructor(circle) {
+//         this.circle = circle;
+//     }
+//     draw() {
+//         this.circle.draw();
+//         this.setRedBorder(circle);
+//     }
+//     setRedBorder(circle) {
+//         console.log('设置红色边框');
+//     }
+// }
+// // 测试
+// let circle = new Circle();
+// circle.draw();
+// console.log('----分割线---');
+// let dec = new Decorator(circle);
+// dec.draw();
+
+
+
+
+// 装饰器模式es7语法
+// @testDec
+// class Demo {
+// }
+// function testDec(target) { // 装饰Demo，把Demo类作为参数（target）传进去
+//     target.isDec = true;
+// }
+// alert(Demo.isDec);
+
+
+
+
+// 装饰器模式es7语法
+// function testDec(isDec) {
+//     return function (target) {
+//         target.isDec = isDec; 
+//     }
+// }
+// @testDec(false)
+// class Demo {
+// }
+// alert(Demo.isDec);
+
+
+
+// 装饰类 - mixin示例
+// function mixins(...list) {
+//     return function(target) {
+//         Object.assign(target.prototype, ...list)
+//     }
+// }
+// const Foo = {
+//     foo(){
+//         alert('foo')
+//     }
+// }
+// @mixins(Foo)
+// class MyClass{
+// };
+// let obj = new MyClass();
+// obj.foo; // 'foo'
+
+
+
+// 装饰方法 - 例1
+// function readonly(target, name, descriptor) {
+//     // descriptor 属性描述对象（Object.defineProperty 中会用到）原来的值如下
+//     // {
+//     //     value: specifiedFunction,
+//     //     enumerabel: false,
+//     //     consfigurable: true,
+//     //     writable: true
+//     // }
+//     descriptor.writable = false;
+//     return descriptor;
+// }
+// class Person {
+//     constructor(){
+//         this.first = 'A';
+//         this.last = 'B';
+//     }
+//     // 装饰方法
+//     @readonly 
+//     name() {
+//         return `${this.first} ${this.last}`
+//     }
+// }
+// var p = new Person();
+// console.log(p.name());
+// p.name = function(){} // 这里会报错，因为name是只读属
+
+
+
+
+// 装饰方法 - 例2
+// function log(target, name, descriptor){
+//     var oldValue = descriptor.value; // descriptor.value指add函数
+//     descriptor.value = function(){
+//         console.log(`Calling ${name} with`, arguments);
+//         return oldValue.apply(this, arguments)
+//     }
+//     return descriptor;
+// }
+// class Math {
+//     @log
+//     add(a, b) {
+//         return a + b;
+//     }
+// }
+// const math = new Math();
+// const result = math.add(2, 4); // 执行add时，会自动打印日志，因为有@log装饰器
+// console.log('result', result);
+
+
+
+
+// core-decorators  1
+// import {readonly} from 'core-decorators';
+// class Person {
+//     @readonly
+//     name() {
+//         return 'zhang san';
+//     }
+// }
+// let p = new Person();
+// console.log(p.name());
+// // p.name = function (){};
+
+
+// core-decorators  2
+// import {deprecate} from 'core-decorators';
+// class Person {
+//     @deprecate('即将废用', {url:'www.baidu.com'})
+//     name(){
+//         return 'zhang san';
+//     }
+// }
+// let p = new Person();
+// p.name();
+
+
+
+
+
+// 代理模式
+// class ReadImg {
+//     constructor(fileName) {
+//         this.fileName = fileName;
+//         this.loadFromDisk();// 初始化即从硬盘中加载。模拟
+
+//     }
+//     display(){
+//         console.log('dispaly...',this.fileName);
+//     }
+//     loadFromDisk(){
+//         console.log('loading...',this.fileName);
+//     }
+// }
+// class ProxyImg{
+//     constructor(fileName){
+//         this.realImg = new ReadImg(fileName);
+//     }
+//     display(){
+//         this.realImg.display();
+//     }
+// }
+// //测试
+// let proxyImg = new ProxyImg('1.png');
+// proxyImg.display();
+
+
+
+
+// 代理模式，明星经济人
+let star = {
+    name:'张xx',
+    age:25,
+    phone:'star:13900000000'
+}
+let agent = new Proxy(star,{
+    get: function(target, key){
+        if(key === 'phone'){
+            //返回经济人自己的手机号
+            return 'agent:18600000000';
+        }
+        if(key === 'price'){
+            // 明星不报价，经纪人报价
+            return 120000;
+        }
+        return target[key];
+    },
+    set: function(target, key, val){
+        if(key === 'customPrice'){
+            if(val < 100000){
+                // 最低10w
+                throw new Error('价格太低');
+            } else {
+                target[key] = val;
+                return true;
+            }
+        }
+    }
+});
+// 测试
+console.log(agent.name);
+console.log(agent.age);
+console.log(agent.phone);
+console.log(agent.price);
+agent.customPrice = 9000;
+console.log('agent.customPrice',agent.customPrice);
