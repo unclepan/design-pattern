@@ -83,6 +83,7 @@ export default class Item {
         this.list.$el.append(this.$el)
     }
 
+    // 模版方法模式
     init() {
         this.initContent()
         this.initBtn()

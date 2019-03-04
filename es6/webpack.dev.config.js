@@ -23,6 +23,11 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, './release'),
         open: true,
-        port: 9090
+        port: 9090,
+        proxy: {
+            '/api/*':{
+                target: 'http://localhost:8880'
+            }
+        }
     }
 }

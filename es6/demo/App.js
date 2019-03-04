@@ -19,6 +19,7 @@ export default class App {
         list.init()
     }
 
+    // 模版方法模式
     init() {
         this.initShoppingCart()
         this.initList()

@@ -149,6 +149,8 @@
 
 
 
+
+
 // UML类图关系
 // class People {
 //     constructor(name, house){
@@ -938,3 +940,284 @@
 // red.handle(context);
 // console.log(context.getState());// 打印状态
 
+
+
+
+// 原型模式
+// let prototype = {
+//     getName:function(){
+//         return this.first + '' +this.last
+//     },
+//     say:function(){
+//         alert('hello')
+//     }
+// }
+// // 基于原型创建 x
+// let x = Object.create(prototype);
+// x.first = 'A';
+// x.last = 'B';
+// alert(x.getName());
+// x.say();
+// // 基于原型创建 y
+// let y = Object.create(prototype);
+// y.first = 'C';
+// y.last = 'D';
+// alert(y.getName());
+// y.say();
+
+
+
+
+// 策略模式
+// 不好例子
+// class User {
+//     constructor(type){
+//         this.type = type;
+//     }
+//     buy(){
+//         if(this.type === 'ordinary'){
+//             console.log('普通用户购买')
+//         } else if (this.type === 'member') {
+//             console.log('会员用户购买')
+//         } else if (this.type === 'vip') {
+//             console.log('vip用户购买')
+//         }
+//     }
+// }
+
+// // 测试
+// let u1 = new User('ordinary');
+// u1.buy();
+
+// let u2 = new User('member');
+// u2.buy();
+
+// let u3 = new User('vip');
+// u3.buy();
+
+
+// 策略模式
+// 好例子
+// class OrdinaryUser {
+//     buy(){
+//         console.log('普通用户购买')
+//     }
+// }
+// class MenberUser {
+//     buy(){
+//         console.log('会员用户购买')
+//     }
+// }
+// class VipUser {
+//     buy(){
+//         console.log('vip用户购买')
+//     }
+// }
+// //test
+// let u1 = new OrdinaryUser();
+// u1.buy();
+
+// let u2 = new MenberUser();
+// u2.buy();
+
+// let u3 = new VipUser();
+// u3.buy();
+
+
+
+
+
+// 职责链模式
+// class Action {
+//     constructor(name){
+//         this.name = name;
+//         this.nextAction = null;
+//     }
+//     setNextAction(action){
+//         this.nextAction = action;
+//     }
+//     handle(){
+//         console.log(`${this.name} 审批`)
+//         if(this.nextAction != null) {
+//             this.nextAction.handle();
+//         }
+//     }
+// }
+
+// let a1 = new Action('组长');
+// let a2 = new Action('经理');
+// let a3 = new Action('总监');
+// a1.setNextAction(a2);
+// a2.setNextAction(a3);
+// a1.handle()
+
+
+
+
+
+
+// 命令模式
+// 接收者
+// class Receiver {
+//     exec() {
+//         console.log('执行')
+//     }
+// }
+
+// // 命令者
+// class Command {
+//     constructor(receiver) {
+//         this.receiver = receiver;
+//     }
+//     cmd() {
+//         console.log('执行命令')
+//         this.receiver.exec();
+//     }
+// }
+// //触发者
+// class Invoker {
+//     constructor(command){
+//         this.command = command;
+//     }
+//     invoke() {
+//         console.log('开始');
+//         this.command.cmd();
+//     }
+// }
+
+// //士兵
+// let soldier = new Receiver();
+// //小号手
+// let trumpeter = new Command(soldier);
+// //将军
+// let generral = new Invoker(trumpeter);
+// generral.invoke();
+
+
+
+
+
+
+// 备忘录模式
+// 备忘类
+// class Memento {
+//     constructor(content) {
+//         this.content = content;
+//     }
+//     getContent() {
+//         return this.content;
+//     }
+// }
+// // 备忘列表
+// class CareTaker {
+//     constructor() {
+//         this.list = [];
+//     }
+//     add(memento){
+//         this.list.push(memento)
+//     }
+//     get(index) {
+//         return this.list[index];
+//     }
+// }
+// // 编辑器
+// class Editor{
+//     constructor(){
+//         this.content = null;
+//     }
+//     setContent(content){
+//         this.content = content;
+//     }
+//     getContent(){
+//         return this.content;
+//     }
+//     saveContentToMemento(){
+//         return new Memento(this.content);
+//     }
+//     getContentFromMemento(memento){
+//         this.content = memento.getContent()
+//     }
+// }
+// // test
+// let editor = new Editor();
+// let careTaker = new CareTaker();
+// editor.setContent('111')
+// editor.setContent('222')
+// careTaker.add(editor.saveContentToMemento())// 将当前内容备份
+// editor.setContent('333')
+// careTaker.add(editor.saveContentToMemento())// 将当前内容备份
+// editor.setContent('444')
+
+// console.log(editor.getContent())
+// editor.getContentFromMemento(careTaker.get(1))//撤销
+// console.log(editor.getContent())
+// editor.getContentFromMemento(careTaker.get(0))//撤销
+// console.log(editor.getContent())
+
+
+
+
+
+
+// 中介者模式
+// class A{
+//     constructor(){
+//         this.number = 0;
+//     }
+//     setNumber(num, m){
+//         this.number = num;
+//         if(m) {
+//             m.setB()
+//         }
+//     }
+// }
+
+// class B{
+//     constructor(){
+//         this.number = 0;
+//     }
+//     setNumber(num, m){
+//         this.number = num;
+//         if(m){
+//             m.setA()
+//         }
+//     }
+// }
+
+
+// // 中介者
+// class Mediator{
+//     constructor(a,b){
+//         this.a = a;
+//         this.b = b;
+//     }
+//     setB(){
+//         let number = this.a.number;
+//         this.b.setNumber(number * 100);
+//     }
+//     setA(){
+//         let number = this.b.number;
+//         this.a.setNumber(number / 100)
+//     }
+// }
+
+// let a = new A();
+// let b = new B();
+// let m = new Mediator(a,b);
+// a.setNumber(100, m);
+// console.log(a.number,b.number);
+// b.setNumber(100, m);
+// console.log(a.number,b.number);
+
+
+
+
+
+
+
+
+
+// 综合实例
+import App from '../demo/App'
+const entry = new App('app');
+entry.init();
